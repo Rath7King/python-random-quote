@@ -14,18 +14,17 @@ sap.ui.define([
         },
 
         onAfterRendering: function() {
-            // Charts are guaranteed to exist in DOM here
             this._configureCharts();
         },
 
         _initModel: function() {
             var oModel = new JSONModel({
-                createdDate: "CREATEDDAY: Dec 28, 2025 5:00...",
+                createdDate: "CREATEDDAY: Dec 28, 2025 0:0...",
                 kpi: {
                     uploaded:  "71",
                     approved:  "60",
                     onboarded: "114",
-                    rejected:  "11"
+                    rejected:  "-"        // shown as dash per reference image
                 },
                 moduleData: [
                     { module: "ESG",      approved: 25, pending: 5, uploaded: 1 },
@@ -38,8 +37,8 @@ sap.ui.define([
                     { module: "ESG",      count: 33.86 },
                     { module: "FINCOST",  count: 5.63  },
                     { module: "ICON",     count: 5.43  },
-                    { module: "NFRP",     count: 6.40  },
-                    { module: "TREASURY", count: 33.89 }
+                    { module: "NFRP",     count: 6.45  },
+                    { module: "TREASURY", count: 43.05 }
                 ],
                 topMonthData: [
                     { template: "NFRP", usage: 23 },
@@ -77,25 +76,28 @@ sap.ui.define([
             this._setupColumnChart("yearChart",     ["#4db8a4", "#2196a8", "#1f3d7a"]);
         },
 
-        // ── Module chart: vertical grouped column ──
+        // Vertical grouped column — MFU Templates by Modules
         _setupModuleChart: function() {
             var oChart = this.byId("moduleBarChart");
             if (!oChart) {
                 console.warn("moduleBarChart not found");
                 return;
             }
-
             oChart.destroyFeeds();
-            oChart.setVizType("column"); // vertical grouped column
+            oChart.setVizType("column");
 
             oChart.setVizProperties({
-                legend: { visible: false },
+                legend:       { visible: false },
                 categoryAxis: { title: { visible: false } },
                 valueAxis:    { title: { visible: false } },
                 title:        { visible: false },
                 plotArea: {
                     colorPalette: ["#1f3d7a", "#4db8a4", "#7ec8a0"],
-                    dataLabel: { visible: true, formatString: "#" }
+                    dataLabel: {
+                        visible: true,
+                        formatString: "#",
+                        hideWhenOverlap: true
+                    }
                 }
             });
 
@@ -103,14 +105,13 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "categoryAxis", type: "Dimension", values: ["Module"] }));
         },
 
-        // ── Donut chart ──
+        // Donut chart
         _setupPieChart: function() {
             var oChart = this.byId("pieChart");
             if (!oChart) {
                 console.warn("pieChart not found");
                 return;
             }
-
             oChart.destroyFeeds();
 
             oChart.setVizProperties({
@@ -126,16 +127,15 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "color", type: "Dimension", values: ["Module"] }));
         },
 
-        // ── Top 3 charts: vertical column ──
+        // Vertical column — Top 3 charts
         _setupColumnChart: function(sId, aColors) {
             var oChart = this.byId(sId);
             if (!oChart) {
                 console.warn(sId + " not found");
                 return;
             }
-
             oChart.destroyFeeds();
-            oChart.setVizType("column"); // vertical column
+            oChart.setVizType("column");
 
             oChart.setVizProperties({
                 legend:       { visible: false },
