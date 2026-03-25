@@ -1,5 +1,5 @@
 /* =====================================================
-   Aspire FinSight — MFU Dashboard  (matches reference)
+   Aspire FinSight — MFU Dashboard
    ===================================================== */
 
 /* ── Page background ── */
@@ -34,19 +34,20 @@
     line-height: 1 !important;
 }
 
-/* ── MFU Dashboard — full-width green banner ── */
+/* ── Full-width green banner ── */
 .dashboardBanner,
 .dashboardBanner.sapMHBox {
     background: #4CAF50 !important;
     padding: 10px 20px !important;
     width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 .dashboardBannerText .sapMText,
 .dashboardBannerText.sapMText {
     color: #ffffff !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
-    letter-spacing: 0.01em !important;
 }
 
 /* ── Date text ── */
@@ -56,22 +57,44 @@
     color: #555 !important;
 }
 
-/* ── Row 1 layout ── */
-.row1Wrap {
-    align-items: stretch;
+/* ── Row 1 outer HBox — strict 50/50 ── */
+.row1Wrap,
+.row1Wrap.sapMHBox {
+    align-items: stretch !important;
+    width: 100% !important;
+}
+
+/* ── KPI half — exactly 50% ── */
+.kpiHalf,
+.kpiHalf.sapMVBox {
+    width: 50% !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: 50% !important;
+    max-width: 50% !important;
+}
+
+/* ── Module half — fills remaining 50% ── */
+.moduleHalf,
+.moduleHalf.sapMVBox {
+    width: 50% !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    flex-basis: 50% !important;
+    max-width: 50% !important;
 }
 
 /* ── KPI Grid ── */
-.kpiGrid {
-    min-width: 280px;
-    max-width: 340px;
-    flex-shrink: 0;
+.kpiGrid,
+.kpiGrid.sapUiLayoutGrid {
+    width: 100% !important;
+    height: 100% !important;
 }
 .kpiGrid .sapUiLayoutGrid > .sapUiLayoutGridC {
     padding: 4px !important;
 }
 
-/* ── KPI Card — white with blue left border ── */
+/* ── KPI Card ── */
 .kpiCard,
 .kpiCard.sapMVBox {
     height: 100% !important;
@@ -92,7 +115,7 @@
     line-height: 1.35 !important;
 }
 
-/* ── KPI value — light green ── */
+/* ── KPI value — green ── */
 .kpiValue .sapMText,
 .kpiValue.sapMText {
     font-size: 2rem !important;
@@ -112,10 +135,26 @@
     margin-top: 2px !important;
 }
 
-/* ── Module chart panel ── */
-.modulePanel {
-    flex: 1 1 0;
-    min-width: 0;
+/* ── Module panel — fills full height of its half ── */
+.modulePanel,
+.modulePanel.sapMPanel {
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    border: 1px solid #e4e4e4 !important;
+    border-radius: 6px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05) !important;
+    width: 100% !important;
+}
+.modulePanel > .sapMPanelHdr,
+.modulePanel.sapMPanel > .sapMPanelHdr {
+    padding: 8px 14px !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+    border-radius: 6px 6px 0 0 !important;
 }
 
 /* ── Generic chart panel ── */

@@ -24,7 +24,7 @@ sap.ui.define([
                     uploaded:  "71",
                     approved:  "60",
                     onboarded: "114",
-                    rejected:  "-"        // shown as dash per reference image
+                    rejected:  "-"
                 },
                 moduleData: [
                     { module: "ESG",      approved: 25, pending: 5, uploaded: 1 },
@@ -76,7 +76,6 @@ sap.ui.define([
             this._setupColumnChart("yearChart",     ["#4db8a4", "#2196a8", "#1f3d7a"]);
         },
 
-        // Vertical grouped column — MFU Templates by Modules
         _setupModuleChart: function() {
             var oChart = this.byId("moduleBarChart");
             if (!oChart) {
@@ -86,9 +85,15 @@ sap.ui.define([
             oChart.destroyFeeds();
             oChart.setVizType("column");
 
+            // Force width to fill the container
+            oChart.setWidth("100%");
+
             oChart.setVizProperties({
                 legend:       { visible: false },
-                categoryAxis: { title: { visible: false } },
+                categoryAxis: {
+                    title: { visible: false },
+                    label: { truncatedLabelRatio: 0.15 }
+                },
                 valueAxis:    { title: { visible: false } },
                 title:        { visible: false },
                 plotArea: {
@@ -97,7 +102,9 @@ sap.ui.define([
                         visible: true,
                         formatString: "#",
                         hideWhenOverlap: true
-                    }
+                    },
+                    // Give enough gap between groups so all 5 modules show
+                    gap: 0.4
                 }
             });
 
@@ -105,7 +112,6 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "categoryAxis", type: "Dimension", values: ["Module"] }));
         },
 
-        // Donut chart
         _setupPieChart: function() {
             var oChart = this.byId("pieChart");
             if (!oChart) {
@@ -127,7 +133,6 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "color", type: "Dimension", values: ["Module"] }));
         },
 
-        // Vertical column — Top 3 charts
         _setupColumnChart: function(sId, aColors) {
             var oChart = this.byId(sId);
             if (!oChart) {
@@ -136,6 +141,7 @@ sap.ui.define([
             }
             oChart.destroyFeeds();
             oChart.setVizType("column");
+            oChart.setWidth("100%");
 
             oChart.setVizProperties({
                 legend:       { visible: false },

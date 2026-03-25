@@ -11,7 +11,8 @@
             <VBox>
 
                 <!-- ── HEADER ── -->
-                <HBox alignItems="Center" justifyContent="SpaceBetween" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiTinyMarginTop">
+                <HBox alignItems="Center" justifyContent="SpaceBetween"
+                      class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiTinyMarginTop">
                     <VBox>
                         <Text text="Aspire" class="aspireLabel"/>
                         <HBox alignItems="Center">
@@ -19,7 +20,7 @@
                             <Text text="Sight" class="brandSight"/>
                         </HBox>
                     </VBox>
-                    <HBox alignItems="Center" class="dateBox">
+                    <HBox alignItems="Center">
                         <core:Icon src="sap-icon://calendar" class="sapUiTinyMarginEnd"/>
                         <Text text="{/createdDate}" class="dateText"/>
                     </HBox>
@@ -33,85 +34,100 @@
                 <!-- ── MAIN CONTENT ── -->
                 <VBox class="sapUiSmallMargin">
 
-                    <!-- ── ROW 1: 2×2 KPI Grid (50%) + Vertical Column Chart (50%) ── -->
-                    <HBox alignItems="Stretch" class="sapUiSmallMarginBottom row1Wrap">
+                    <!-- ══ ROW 1: KPI (50%) + Module Chart (50%) ══
+                         Key fix: use l:Grid with two equal XL6 columns.
+                         SAP's Grid is the most reliable way to enforce
+                         exactly equal widths in UI5 — HBox with custom
+                         width classes fights the flexbox algorithm.
+                    -->
+                    <l:Grid hSpacing="1" vSpacing="0"
+                            defaultSpan="XL6 L6 M6 S12"
+                            class="sapUiSmallMarginBottom"
+                            containerQuery="true"
+                            width="100%">
 
-                        <l:Grid defaultSpan="XL6 L6 M6 S6"
-                                class="kpiGrid sapUiSmallMarginEnd"
-                                containerQuery="true">
+                        <!-- LEFT CELL: 2x2 KPI cards -->
+                        <VBox class="kpiHalf">
+                            <l:Grid defaultSpan="XL6 L6 M6 S6"
+                                    class="kpiGrid"
+                                    containerQuery="true"
+                                    width="100%">
 
-                            <VBox class="kpiCard">
-                                <Text text="Total MFU Uploaded" class="kpiLabel"/>
-                                <Text text="{/kpi/uploaded}" class="kpiValue"/>
-                                <Text text="MFU COUNT" class="kpiSubLabel"/>
-                            </VBox>
+                                <VBox class="kpiCard">
+                                    <Text text="Total MFU Uploaded" class="kpiLabel"/>
+                                    <Text text="{/kpi/uploaded}" class="kpiValue"/>
+                                    <Text text="MFU COUNT" class="kpiSubLabel"/>
+                                </VBox>
 
-                            <VBox class="kpiCard">
-                                <Text text="Total MFU Approved" class="kpiLabel"/>
-                                <Text text="{/kpi/approved}" class="kpiValue"/>
-                                <Text text="MFU COUNT" class="kpiSubLabel"/>
-                            </VBox>
+                                <VBox class="kpiCard">
+                                    <Text text="Total MFU Approved" class="kpiLabel"/>
+                                    <Text text="{/kpi/approved}" class="kpiValue"/>
+                                    <Text text="MFU COUNT" class="kpiSubLabel"/>
+                                </VBox>
 
-                            <VBox class="kpiCard">
-                                <Text text="MFU Template Onboarded" class="kpiLabel"/>
-                                <Text text="{/kpi/onboarded}" class="kpiValue"/>
-                                <Text text="MFU COUNT" class="kpiSubLabel"/>
-                            </VBox>
+                                <VBox class="kpiCard">
+                                    <Text text="MFU Template Onboarded" class="kpiLabel"/>
+                                    <Text text="{/kpi/onboarded}" class="kpiValue"/>
+                                    <Text text="MFU COUNT" class="kpiSubLabel"/>
+                                </VBox>
 
-                            <VBox class="kpiCard">
-                                <Text text="Total MFU Rejected" class="kpiLabel"/>
-                                <Text text="{/kpi/rejected}" class="kpiValue"/>
-                                <Text text="MFU COUNT" class="kpiSubLabel"/>
-                            </VBox>
+                                <VBox class="kpiCard">
+                                    <Text text="Total MFU Rejected" class="kpiLabel"/>
+                                    <Text text="{/kpi/rejected}" class="kpiValue"/>
+                                    <Text text="MFU COUNT" class="kpiSubLabel"/>
+                                </VBox>
 
-                        </l:Grid>
+                            </l:Grid>
+                        </VBox>
 
-                        <!-- Vertical Column Chart: MFU Templates by Modules -->
-                        <Panel headerText="MFU Templates by Modules"
-                               class="chartPanel modulePanel" expandable="false">
-                            <content>
-                                <HBox class="sapUiTinyMargin" justifyContent="End">
-                                    <HBox alignItems="Center" class="sapUiTinyMarginEnd">
-                                        <core:Icon src="sap-icon://circle-task-2" class="legendIconApproved"/>
-                                        <Text text="approved" class="legendText sapUiTinyMarginBegin"/>
+                        <!-- RIGHT CELL: MFU Templates by Modules vertical chart -->
+                        <VBox class="moduleHalf">
+                            <Panel headerText="MFU Templates by Modules"
+                                   class="modulePanel" expandable="false">
+                                <content>
+                                    <HBox class="sapUiTinyMargin" justifyContent="End">
+                                        <HBox alignItems="Center" class="sapUiTinyMarginEnd">
+                                            <core:Icon src="sap-icon://circle-task-2" class="legendIconApproved"/>
+                                            <Text text="approved" class="legendText sapUiTinyMarginBegin"/>
+                                        </HBox>
+                                        <HBox alignItems="Center" class="sapUiTinyMarginEnd">
+                                            <core:Icon src="sap-icon://circle-task-2" class="legendIconPending"/>
+                                            <Text text="pending" class="legendText sapUiTinyMarginBegin"/>
+                                        </HBox>
+                                        <HBox alignItems="Center">
+                                            <core:Icon src="sap-icon://circle-task-2" class="legendIconUploaded"/>
+                                            <Text text="uploaded" class="legendText sapUiTinyMarginBegin"/>
+                                        </HBox>
                                     </HBox>
-                                    <HBox alignItems="Center" class="sapUiTinyMarginEnd">
-                                        <core:Icon src="sap-icon://circle-task-2" class="legendIconPending"/>
-                                        <Text text="pending" class="legendText sapUiTinyMarginBegin"/>
-                                    </HBox>
-                                    <HBox alignItems="Center">
-                                        <core:Icon src="sap-icon://circle-task-2" class="legendIconUploaded"/>
-                                        <Text text="uploaded" class="legendText sapUiTinyMarginBegin"/>
-                                    </HBox>
-                                </HBox>
-                                <viz:VizFrame id="moduleBarChart"
-                                    uiConfig="{applicationSet:'fiori'}"
-                                    height="220px" width="100%"
-                                    vizType="column">
-                                    <viz:dataset>
-                                        <vizData:FlattenedDataset data="{/moduleData}">
-                                            <vizData:dimensions>
-                                                <vizData:DimensionDefinition name="Module" value="{module}"/>
-                                            </vizData:dimensions>
-                                            <vizData:measures>
-                                                <vizData:MeasureDefinition name="Approved" value="{approved}"/>
-                                                <vizData:MeasureDefinition name="Pending"  value="{pending}"/>
-                                                <vizData:MeasureDefinition name="Uploaded" value="{uploaded}"/>
-                                            </vizData:measures>
-                                        </vizData:FlattenedDataset>
-                                    </viz:dataset>
-                                </viz:VizFrame>
-                            </content>
-                        </Panel>
+                                    <viz:VizFrame id="moduleBarChart"
+                                        uiConfig="{applicationSet:'fiori'}"
+                                        height="240px"
+                                        width="100%"
+                                        vizType="column">
+                                        <viz:dataset>
+                                            <vizData:FlattenedDataset data="{/moduleData}">
+                                                <vizData:dimensions>
+                                                    <vizData:DimensionDefinition name="Module" value="{module}"/>
+                                                </vizData:dimensions>
+                                                <vizData:measures>
+                                                    <vizData:MeasureDefinition name="Approved" value="{approved}"/>
+                                                    <vizData:MeasureDefinition name="Pending"  value="{pending}"/>
+                                                    <vizData:MeasureDefinition name="Uploaded" value="{uploaded}"/>
+                                                </vizData:measures>
+                                            </vizData:FlattenedDataset>
+                                        </viz:dataset>
+                                    </viz:VizFrame>
+                                </content>
+                            </Panel>
+                        </VBox>
 
-                    </HBox>
+                    </l:Grid>
 
-                    <!-- ── ROW 2: Donut + 3 Vertical Column Charts ── -->
+                    <!-- ── ROW 2: Donut + 3 Column Charts ── -->
                     <l:Grid defaultSpan="XL3 L3 M6 S12"
                             class="sapUiSmallMarginBottom"
                             containerQuery="true">
 
-                        <!-- Donut: Templates by Count -->
                         <Panel headerText="MFU Templates by Count"
                                class="chartPanel" expandable="false">
                             <content>
@@ -155,7 +171,6 @@
                             </content>
                         </Panel>
 
-                        <!-- Column: Top 3 by Month -->
                         <Panel headerText="Top 3 MFU Templates by Usage (by Month)"
                                class="chartPanel" expandable="false">
                             <content>
@@ -177,7 +192,6 @@
                             </content>
                         </Panel>
 
-                        <!-- Column: Top 3 by Quarter -->
                         <Panel headerText="Top 3 MFU Templates by Usage (by Quarter)"
                                class="chartPanel" expandable="false">
                             <content>
@@ -199,7 +213,6 @@
                             </content>
                         </Panel>
 
-                        <!-- Column: Top 3 by Year -->
                         <Panel headerText="Top 3 MFU Templates by Usage (by Year)"
                                class="chartPanel" expandable="false">
                             <content>
