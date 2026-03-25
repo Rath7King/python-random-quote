@@ -14,6 +14,7 @@ sap.ui.define([
         },
 
         onAfterRendering: function() {
+            // Charts are guaranteed to exist in DOM here
             this._configureCharts();
         },
 
@@ -76,15 +77,19 @@ sap.ui.define([
             this._setupColumnChart("yearChart",     ["#4db8a4", "#2196a8", "#1f3d7a"]);
         },
 
+        // ── Module chart: vertical grouped column ──
         _setupModuleChart: function() {
             var oChart = this.byId("moduleBarChart");
-            if (!oChart) { return; }
+            if (!oChart) {
+                console.warn("moduleBarChart not found");
+                return;
+            }
 
             oChart.destroyFeeds();
-            oChart.setVizType("column");  // ← vertical grouped column
+            oChart.setVizType("column"); // vertical grouped column
 
             oChart.setVizProperties({
-                legend:       { visible: false },
+                legend: { visible: false },
                 categoryAxis: { title: { visible: false } },
                 valueAxis:    { title: { visible: false } },
                 title:        { visible: false },
@@ -98,9 +103,13 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "categoryAxis", type: "Dimension", values: ["Module"] }));
         },
 
+        // ── Donut chart ──
         _setupPieChart: function() {
             var oChart = this.byId("pieChart");
-            if (!oChart) { return; }
+            if (!oChart) {
+                console.warn("pieChart not found");
+                return;
+            }
 
             oChart.destroyFeeds();
 
@@ -117,12 +126,16 @@ sap.ui.define([
             oChart.addFeed(new FeedItem({ uid: "color", type: "Dimension", values: ["Module"] }));
         },
 
+        // ── Top 3 charts: vertical column ──
         _setupColumnChart: function(sId, aColors) {
             var oChart = this.byId(sId);
-            if (!oChart) { return; }
+            if (!oChart) {
+                console.warn(sId + " not found");
+                return;
+            }
 
             oChart.destroyFeeds();
-            oChart.setVizType("column");  // ← vertical column
+            oChart.setVizType("column"); // vertical column
 
             oChart.setVizProperties({
                 legend:       { visible: false },

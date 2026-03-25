@@ -1,37 +1,75 @@
 /* =====================================================
    Aspire FinSight — MFU Dashboard
    ===================================================== */
-.sapMPage > .sapMPageBG {
+
+/* ── Page background ── */
+.sapMPageBg {
     background-color: #f0f2f5 !important;
 }
 
-/* ── Header ── */
+/* ── Aspire label ── */
+.aspireLabel,
+.aspireLabel.sapMText {
+    font-size: 0.72rem !important;
+    color: #888 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
 .aspireLabel .sapMText {
     font-size: 0.72rem !important;
     color: #888 !important;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
-.brandFin .sapMText {
+
+/* ── Fin = Blue, Sight = Green ── */
+.brandFin,
+.brandFin.sapMText {
+    color: #1565C0 !important;
     font-size: 1.4rem !important;
     font-weight: 700 !important;
+}
+.brandFin .sapMText {
     color: #1565C0 !important;
-    display: inline !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+}
+.brandSight,
+.brandSight.sapMText {
+    color: #43A047 !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
 }
 .brandSight .sapMText {
+    color: #43A047 !important;
     font-size: 1.4rem !important;
     font-weight: 700 !important;
-    color: #43A047 !important;
-    display: inline !important;
 }
-.dashboardTitle .sapMTitle {
-    display: inline-block;
+
+/* ── MFU Dashboard badge — light green ── */
+.dashboardTitle,
+.dashboardTitle.sapMTitle {
+    display: inline-block !important;
+    background: #C8E6C9 !important;
+    color: #1B5E20 !important;
     font-size: 0.85rem !important;
     font-weight: 600 !important;
+    padding: 2px 10px !important;
+    border-radius: 3px !important;
+}
+.dashboardTitle > span,
+.dashboardTitle .sapMTitleStyle {
     color: #1B5E20 !important;
-    background: #C8E6C9;
-    padding: 2px 10px;
-    border-radius: 3px;
+    background: #C8E6C9 !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+}
+
+/* ── Date text ── */
+.dateText,
+.dateText.sapMText {
+    font-size: 0.72rem !important;
+    color: #777 !important;
 }
 .dateText .sapMText {
     font-size: 0.72rem !important;
@@ -54,25 +92,48 @@
 }
 
 /* ── KPI Card ── */
-.kpiCard {
+.kpiCard,
+.kpiCard.sapMVBox {
     height: 100%;
     padding: 12px 14px !important;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
 }
-.kpiAccentBar {
+
+/* ── KPI accent bar icon ── */
+.kpiAccentBar,
+.kpiAccentBar.sapUiIcon {
     font-size: 0.9rem !important;
     color: #1565C0 !important;
-    border-left: 3px solid #1565C0;
-    padding-left: 5px;
-    margin-right: 4px;
+    border-left: 3px solid #1565C0 !important;
+    padding-left: 5px !important;
+    margin-right: 4px !important;
+}
+
+/* ── KPI label ── */
+.kpiLabel,
+.kpiLabel.sapMText {
+    font-size: 0.75rem !important;
+    color: #555 !important;
+    line-height: 1.3 !important;
 }
 .kpiLabel .sapMText {
     font-size: 0.75rem !important;
     color: #555 !important;
     line-height: 1.3 !important;
+}
+
+/* ── KPI value — light green ── */
+.kpiValue,
+.kpiValue.sapMText {
+    margin-top: 6px !important;
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    color: #4CAF50 !important;
+    line-height: 1.1 !important;
+    display: block !important;
 }
 .kpiValue .sapMText {
     margin-top: 6px !important;
@@ -80,6 +141,16 @@
     font-weight: 700 !important;
     color: #4CAF50 !important;
     line-height: 1.1 !important;
+    display: block !important;
+}
+
+/* ── KPI sub label ── */
+.kpiSubLabel,
+.kpiSubLabel.sapMText {
+    margin-top: 2px !important;
+    font-size: 0.62rem !important;
+    color: #aaa !important;
+    letter-spacing: 0.05em;
 }
 .kpiSubLabel .sapMText {
     margin-top: 2px !important;
@@ -95,13 +166,15 @@
 }
 
 /* ── Generic chart panel ── */
-.chartPanel {
+.chartPanel,
+.chartPanel.sapMPanel {
     background: #ffffff !important;
     border: 1px solid #e8e8e8 !important;
     border-radius: 10px !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05) !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
 }
-.chartPanel > .sapMPanelHdr {
+.chartPanel > .sapMPanelHdr,
+.chartPanel.sapMPanel > .sapMPanelHdr {
     padding: 8px 14px !important;
     font-size: 0.8rem !important;
     font-weight: 600 !important;
@@ -111,16 +184,34 @@
     border-radius: 10px 10px 0 0 !important;
 }
 
-/* ── Legend ── */
-.legendText .sapMText       { font-size: 0.7rem !important; color: #555 !important; }
-.legendIconApproved         { font-size: 0.6rem !important; color: #1f3d7a !important; }
-.legendIconPending          { font-size: 0.6rem !important; color: #4db8a4 !important; }
-.legendIconUploaded         { font-size: 0.6rem !important; color: #7ec8a0 !important; }
-.legendESG                  { font-size: 0.6rem !important; color: #2196a8 !important; }
-.legendFINCOST              { font-size: 0.6rem !important; color: #4db8a4 !important; }
-.legendICON                 { font-size: 0.6rem !important; color: #7ec8c8 !important; }
-.legendNFRP                 { font-size: 0.6rem !important; color: #1a5276 !important; }
-.legendTREASURY             { font-size: 0.6rem !important; color: #34495e !important; }
+/* ── Legend text ── */
+.legendText,
+.legendText.sapMText {
+    font-size: 0.7rem !important;
+    color: #555 !important;
+}
+.legendText .sapMText {
+    font-size: 0.7rem !important;
+    color: #555 !important;
+}
+
+/* ── Legend icons ── */
+.legendIconApproved,
+.legendIconApproved.sapUiIcon { font-size: 0.6rem !important; color: #1f3d7a !important; }
+.legendIconPending,
+.legendIconPending.sapUiIcon  { font-size: 0.6rem !important; color: #4db8a4 !important; }
+.legendIconUploaded,
+.legendIconUploaded.sapUiIcon { font-size: 0.6rem !important; color: #7ec8a0 !important; }
+.legendESG,
+.legendESG.sapUiIcon          { font-size: 0.6rem !important; color: #2196a8 !important; }
+.legendFINCOST,
+.legendFINCOST.sapUiIcon      { font-size: 0.6rem !important; color: #4db8a4 !important; }
+.legendICON,
+.legendICON.sapUiIcon         { font-size: 0.6rem !important; color: #7ec8c8 !important; }
+.legendNFRP,
+.legendNFRP.sapUiIcon         { font-size: 0.6rem !important; color: #1a5276 !important; }
+.legendTREASURY,
+.legendTREASURY.sapUiIcon     { font-size: 0.6rem !important; color: #34495e !important; }
 
 /* ── MFU Details Table ── */
 .mfuTable .sapMListTblHeaderCell {
@@ -136,6 +227,11 @@
 .mfuTable .sapMText {
     font-size: 0.78rem !important;
     color: #333 !important;
+}
+.loadCount,
+.loadCount.sapMText {
+    font-weight: 500 !important;
+    color: #1565C0 !important;
 }
 .loadCount .sapMText {
     font-weight: 500 !important;
